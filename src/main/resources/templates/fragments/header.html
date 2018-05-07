@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:replace="headInc">
+</head>
+<body>
+	<!-- start of header -->
+	<header th:fragment="header">
+		<!-- *** TOP ***
+_________________________________________________________ -->
+		<div id="top">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-5 contact">
+						<p class="hidden-sm hidden-xs">Contact us today on 0966879086 or
+							homanhluc95@gmail.com</p>
+						<p class="hidden-md hidden-lg">
+							<a href="#" data-animate-hover="pulse"><i class="fa fa-phone"></i></a>
+							<a href="#" data-animate-hover="pulse"><i
+								class="fa fa-envelope"></i></a>
+						</p>
+					</div>
+					<div class="col-xs-7">
+						<div class="social">
+							<a href="#" class="external facebook" data-animate-hover="pulse"><i
+								class="fa fa-facebook"></i></a> <a href="#" class="external gplus"
+								data-animate-hover="pulse"><i class="fa fa-google-plus"></i></a>
+							<a href="#" class="external twitter" data-animate-hover="pulse"><i
+								class="fa fa-twitter"></i></a> <a href="#" class="email"
+								data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+						</div>
+
+						<div class="login">
+							<a href="#" data-toggle="modal" data-target="#login-modal"><i
+								class="fa fa-sign-in"></i> <span
+								class="hidden-xs text-uppercase">Admin</span></a> 
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- *** TOP END *** -->
+
+		<!-- *** NAVBAR ***
+    _________________________________________________________ -->
+
+		<div class="navbar-affixed-top" data-spy="affix" data-offset-top="200">
+
+			<div class="navbar navbar-default yamm" role="navigation" id="navbar">
+
+				<div class="container">
+					<div class="navbar-header">
+
+						<a class="navbar-brand home" th:href="@{/}"> <img
+                                                        th:src="@{/img/logo.png}" alt="Explore Botswana logo" height="50px"
+							class="hidden-xs hidden-sm" /> <img src="img/logo-small.png"
+							alt="FinTech logo" class="visible-xs visible-sm" /><span
+							class="sr-only">blog-luchm</span>
+						</a>
+						<div class="navbar-buttons">
+							<button type="button" class="navbar-toggle btn-template-main"
+								data-toggle="collapse" data-target="#navigation">
+								<span class="sr-only">Toggle navigation</span> <i
+									class="fa fa-align-justify"></i>
+							</button>
+						</div>
+					</div>
+					<!--/.navbar-header -->
+
+					<div class="navbar-collapse collapse" id="navigation">
+
+						<ul class="nav navbar-nav navbar-right">
+							<li th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}"><a  th:href="@{/}"> Home </a></li>
+							<li th:classappend="${#httpServletRequest.getRequestURI() == '/about-financial-tech-journal' ? 'active':''}"><a th:href="@{about-financial-tech-journal}">About Us</a></li>
+							 							<li th:classappend="${#httpServletRequest.getRequestURI() == '/contact-us' ? 'active':''}"><a th:href="@{/contact-us}">
+									Contact Us</a></li>
+							 <li class="dropdown">
+                                    <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">Articles <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a th:href="@{/finance}">Finance</a>
+                                        </li>
+                                        <li><a th:href="@{/information-technology}">Information Technology</a>
+                                        </li>
+                                        <li><a th:href="@{/cv-writing}">CV Writing</a>
+                                        </li>
+                                        <li><a th:href="@{/software-development}">Software Development</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+							<li th:classappend="${#httpServletRequest.getRequestURI() == '/our-team' ? 'active':''}"><a th:href="@{/our-team}">Services</a></li>
+							<li th:classappend="${#httpServletRequest.getRequestURI() == '/admin/' ? 'active':''}" sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin/}">Admin</a></li>
+						</ul>
+					</div>
+					<!--/.nav-collapse -->
+					<div class="collapse clearfix" id="search">
+
+						<form class="navbar-form" role="search">
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Search" />
+								<span class="input-group-btn">
+
+									<button type="submit" class="btn btn-template-main">
+										<i class="fa fa-search"></i>
+									</button>
+
+								</span>
+							</div>
+						</form>
+					</div>
+					<!--/.nav-collapse -->
+				</div>
+			</div>
+			<!-- /#navbar -->
+		</div>
+		<!-- *** NAVBAR END *** -->
+	</header>
+	<!-- #### JAVASCRIPT FILES ### -->
+	<!--/*/ <th:block th:include="fragments/scripts :: scripts"></th:block> /*/-->
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="keywords" content="" />
+<title>Add a new post</title>
+<!--/*/ <th:block th:include="fragments/headInc :: headInc"></th:block> /*/-->
+</head>
+<body>
+	<!-- *** START OF HEADER ***  -->
+	<header th:replace="fragments/header :: header"> This section
+		of the header will be replaced by a fragment header </header>
+	<!-- *** END OF HEADER ***  -->
+
+	<!--*** START OF MAIN ***-->
+	<div id="heading-breadcrumbs">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<h1>New Post - Admin</h1>
+				</div>
+				<div class="col-md-6">
+					<ul class="breadcrumb">
+						<li><a th:href="@{/admin/}">ADMIN</a></li>
+						<li>New Post</li>
+					</ul>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="content" class="clearfix">
+
+		<div class="container">
+
+			<div class="row">
+
+				<!-- *** LEFT COLUMN ***			 _________________________________________________________ -->
+				<div th:replace="admin/fragments/admin-adverts :: admin-adverts">This
+					side menu will be replaced by fragment code</div>
+				<!-- END OF LEFT COLUMN -->
+
+				<!-- *** RIGHT COLUMN ***			 _________________________________________________________ -->
+				<div class="col-md-10" id="customer-account">
+					<div class="box clearfix">
+						<div class="heading">
+							<h3 class="text-uppercase">New User details</h3>
+							<a th:href="@{/admin/}" class="pull-right btn btn-template-main">Back</a>
+						</div>
+
+						<form th:action="@{/admin/user/save}" method="post"
+							th:object="${user}">
+							<input type="hidden" th:field="*{userId}" />
+							<div class="form-group"
+								th:classappend="${#fields.hasErrors('firstName')}? 'has-error'">
+								<label for="firstName">Firstname</label> <input type="text" id="firstName"
+									name="firstName" class="form-control"
+									placeholder="firstname?..."
+									th:field="*{firstName}" /> <span
+									th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+									th:class="help-block">First name is required</span>
+							</div>
+							<div class="form-group"
+								th:classappend="${#fields.hasErrors('lastName')}? 'has-error'">
+								<label for="lastName">Lastname</label> <input type="text" id="lastName"
+									name="lastName" class="form-control"
+									placeholder="lastname?..."
+									th:field="*{lastName}" /> <span
+									th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+									th:class="help-block">Last name is required</span>
+							</div>
+							<div class="form-group"
+								th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+								<label for="email">Email</label> <input type="email" id="email"
+									name="email" class="form-control"
+									placeholder="email?..."
+									th:field="*{email}" /> <span
+									th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+									th:class="help-block">Email is requireds</span>
+							</div>
+							<div class="form-group">
+								<label for="status">Status</label> <select name="status"
+									id="status" class="form-control" th:field="*{status}">
+									<option value="enabled">Enable</option>
+									<option value="disabled">Disable</option>
+								</select>
+							</div>
+							<div class="form-group"
+								th:classappend="${#fields.hasErrors('password')}? 'has-error'">
+								<label for="password">Password</label> <input type="password" id="password"
+									name="password" class="form-control"
+									placeholder="password?..."
+									th:field="*{password}" /> <span
+									th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+									th:class="help-block">Password is required</span>
+							</div>
+							<!-- <div class="form-group"
+								th:classappend="${#fields.hasErrors('slug')}? 'has-error'">
+								<label for="slug">Slug</label> <input type="text"
+									class="form-control" name="slug" id="slug" th:field="*{slug}" />
+								<span th:if="${#fields.hasErrors('slug')}" th:errors="*{slug}"
+									th:class="help-block">Slug Errors</span>
+							</div>
+							
+							<div class="form-group" th:classappend="${#fields.hasErrors('teaser')}? 'has-error'">
+								<label for="teaser">Teaser</label>
+								<textarea class="form-control" cols="3" rows="3" maxlength="225"
+									placeholder="teaser?" th:field="*{teaser}"></textarea>
+									<span th:if="${#fields.hasErrors('teaser')}"
+									th:errors="*{teaser}" th:class="help-block">Teaser
+									Errors</span>
+							</div>
+							<div class="form-group">
+								<label for="draft">Draft</label> <input type="checkbox"
+									th:field="*{draft}" />
+							</div>
+							<div th:class="form-group" th:classappend="${#fields.hasErrors('author.id')}? 'has-error'">
+								<label for="status">Author</label> <select name="status"
+									id="status" class="form-control" th:field="*{author.id}">
+									<option th:each="author : ${authors}" th:value="${author.id}"
+										th:text="${author.firstName + ' ' + author.lastName}">Authors</option>
+								</select> 
+								
+								<span th:if="${#fields.hasErrors('author.id')}"
+									th:errors="*{author.id}" th:class="help-block">Author
+									Errors</span>
+							</div>
+
+							<div class="form-group">
+								<label for="status">Status</label> <select name="status"
+									id="status" class="form-control" th:field="*{status}">
+									<option value="active">Active</option>
+									<option value="inactive">Inactive</option>
+								</select>
+							</div>
+							<div class="form-group"
+								th:classappend="${#fields.hasErrors('body')}? 'has-error'">
+								<label for="body">Body</label>
+								<textarea name="text" cols="5" class="form-control" rows="10"
+									placeholder="post content?" th:field="*{body}"></textarea>
+								<span th:if="${#fields.hasErrors('body')}" th:errors="*{body}"
+									th:class="help-block">Body Errors</span>
+							</div> -->
+
+							<button type="submit" class="btn btn-template-main">Submit</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- #### JAVASCRIPT FILES ### -->
+	<!--/*/ <th:block th:include="fragments/scripts :: scripts"></th:block> /*/-->
+</body>
+</html>
